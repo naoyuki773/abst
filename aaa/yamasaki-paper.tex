@@ -1,0 +1,104 @@
+%% 論文
+
+%% プリアンブル %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\documentclass{kut-paper}			%% jis フォントを使用する場合
+\documentclass[mingoth]{kut-paper}		%% 通常フォントを使用する場合
+%\documentclass[twoside]{kut-paper}		%% 両面印刷の場合
+
+%\usepackage{graphicx}
+\usepackage{utf}
+%% 表紙 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\ScInfo                         %% 情報学群の場合に追加する．それ以外の場合はコメントアウト
+
+\Bachelor			%% 学士学位論文（卒業研究）の場合
+%\Project			%% プロジェクト研究報告書の場合
+%\Seminar			%% 特別研究セミナー課題研究報告書の場合
+%\Master			%% 修士学位論文（情報システム工学コース）の場合
+%\Doctorate			%% 博士学位論文（情報システム工学コース）の場合
+%\English			%% 英語の場合（特別研究セミナーの場合は選択不可）
+%\figurespagefalse		%% 図目次を出力しない場合
+%\tablespagefalse		%% 表目次を出力しない場合
+
+\years{平成24}
+\title{LSTM-RNN用アクセラレータ回路の負荷割当法の検討}
+\titlelength{19}		%% 表紙の表題の行長(全角文字数<20, default=19)
+\Etitle{}
+\idnumber{1180386}
+\author{山 \UTF{FA11} ~~尚 之}
+\Eauthor{YAMASAKI， Naoyuki}
+\advisor{岩田 ~~誠}
+\date{2018 年 2 月 28 日}
+\abstract{近年の深層ニューラルネットワークDNN(Deep Neural Network)研究の進展に伴い，
+高速化を目的とした専用アクセラレータ回路が提案されている．
+しかし，長期短期記憶LSTM(Long Short-term Memorry)に代表されるような，
+大規模で複雑なネットワークはシングルコアでの処理に限界がある．
+そのため，マルチコア化を行い負荷を分散させる必要があり，
+高効率な分散を実現するためには，
+適切な負荷の割り当てが可能な相互結合網が必要となる．
+
+本研究では，この相互結合網で行う負荷割り当ての方法について，
+同時実行並列，パイプライン並列，データ並列の3種の方法について検討を行い性能の見積もりを行った．
+結果として，データ並列方向の負荷割り当てを行うと，
+二番目に性能の良かった同時実行並列の負荷割り当てに比べ，
+7.2\%低負荷での実行が可能であるという見積もりが得られた．
+
+次に，最も性能の高い結果の得られたデータ並列の負荷割り当てに対し，1コアあたりの平均稼働率を算出した．
+LSTMを実行した場合，1タイムステップあたり662回のNOP命令が実行され，
+稼働率は95\%であった．
+また，コア数を固定し中間数のニューロン数を増加させると，稼働率も上昇した．
+このことより，データ並列の分割は今後出てくる可能性のあるより複雑で演算回数の多いDNNにも対応可能であるといえる．
+
+
+}
+\keyword{キーワード
+}
+\Eabstract{English
+}				%% プロジェクト研究報告書の場合は不要
+\Ekeyword{English
+}				%% プロジェクト研究報告書の場合は不要
+
+%% 本文 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\maketitle
+
+\chapter{序論}
+\input{chapter1.tex}
+
+\chapter{単一LSTMアクセラレータの構成と機能}
+\input{chapter2.tex}
+
+\chapter{負荷割り当て方法}
+\input{chapter3.tex}
+
+\chapter{性能の見積もり}
+\input{chapter4.tex}
+
+\chapter{結論}
+\input{chapter5.tex}
+%% 謝辞 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{acknowledgement}
+%\input{acknowledgement.tex}
+\end{acknowledgement}
+
+%% 参考文献 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{thebibliography}{99}
+%\input{bibliography.tex}
+\end{thebibliography}
+
+%% 付録 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\appendix
+
+\chapter{}
+%\input{appendex1.tex}
+
+\chapter{}
+%\input{appendex2.tex}
+
+\end{document}
